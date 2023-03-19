@@ -1,3 +1,3 @@
-### <center> Yuya Moses Tokuta </center>
+### <center> Personal website of Yuya Tokuta </center>
 
-Try and error
+Copyright © 2023 Yuya Tokuta All rights reserved.
