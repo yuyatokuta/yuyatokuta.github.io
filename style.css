@@ -1,21 +1,23 @@
 /* === Global settings === */
 :root {
-  --font-body: "Noto Serif JP", serif;
-  --font-sans: "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Noto Serif JP", "Noto Serif", serif;
+  --font-sans: "Noto Sans JP", "Noto Sans", sans-serif;
   --max-width: 900px;
-  --link-color: #0366d6;
+  --link-color: #2b63c8;
   --bg-color: #ffffff;
-  --text-color: #222;
-  --muted-text: #666;
+  --text-color: #222222;
+  --muted-text: #555555;
+  --divider-color: rgba(0, 0, 0, 0.06);
 }
 
 /* Dark mode (automatic) */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-color: #181818;
-    --text-color: #e5e5e5;
-    --muted-text: #aaa;
-    --link-color: #6ca0ff;
+    --bg-color: #1b1b1b;
+    --text-color: #e7e7e7;
+    --muted-text: #aaaaaa;
+    --link-color: #8db4ff;
+    --divider-color: rgba(255, 255, 255, 0.08);
   }
 }
 
@@ -45,7 +47,8 @@ footer {
 header h1 {
   font-family: var(--font-sans);
   font-size: 2rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
 }
 
 .subtitle {
@@ -61,19 +64,20 @@ nav ul {
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 1.3rem;
+  gap: 1.2rem;
 }
 
 nav a {
   text-decoration: none;
   color: var(--link-color);
+  font-family: var(--sans-font);
   font-weight: 500;
   letter-spacing: 0.02em;
-  transition: color 0.2s ease;
+  transition: color 0.25s ease;
 }
 
 nav a:hover {
-  color: #024ea2;
+  opacity: 0.8;
 }
 
 /* === Sections === */
@@ -83,14 +87,15 @@ main section {
 }
 
 main section + section {
-  border-top: 1px solid rgba(0, 0, 0, 0.05); /* subtle divider only between sections */
+  border-top: 1px solid var(--divider-color);
   padding-top: 2rem;
 }
 
 main h2 {
   font-family: var(--font-sans);
-  font-size: 1.35rem;
-  margin-bottom: 0.7rem;
+  font-size: 1.3rem;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
 }
 
 main h3 {
@@ -98,12 +103,12 @@ main h3 {
   font-size: 1.05rem;
   margin-top: 1.2rem;
   margin-bottom: 0.4rem;
+  font-weight: 500;
 }
 
 main p {
   margin-bottom: 1rem;
   text-align: left;
-  color: var(--text-color);
 }
 
 /* === Lists === */
@@ -123,16 +128,17 @@ footer {
   text-align: center;
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 1px solid var(--divider-color);
 }
 
 footer a {
   color: var(--link-color);
   text-decoration: none;
+  transition: opacity 0.2s;
 }
 
 footer a:hover {
-  text-decoration: underline;
+  opacity: 0.8;
 }
 
 /* === Responsive adjustments === */
