@@ -2,7 +2,7 @@
 :root {
   --font-body: "Noto Serif JP", "Noto Serif", serif;
   --font-sans: "Noto Sans JP", "Noto Sans", sans-serif;
-  --max-width: 900px;
+  --max-width: 1200px; /* widened from 900px */
   --link-color: #2b63c8;
   --bg-color: #ffffff;
   --text-color: #222222;
@@ -40,7 +40,7 @@ main,
 footer {
   max-width: var(--max-width);
   margin: auto;
-  padding: 1.5rem;
+  padding: 2rem 1.5rem; /* more balanced spacing */
 }
 
 /* === Header === */
@@ -70,7 +70,7 @@ nav ul {
 nav a {
   text-decoration: none;
   color: var(--link-color);
-  font-family: var(--sans-font);
+  font-family: var(--font-sans);
   font-weight: 500;
   letter-spacing: 0.02em;
   transition: color 0.25s ease;
@@ -142,7 +142,7 @@ footer a:hover {
 }
 
 /* === Responsive adjustments === */
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
   body {
     font-size: 0.95rem;
     line-height: 1.7;
