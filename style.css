@@ -1,0 +1,64 @@
+:root {
+  --font-body: "Noto Serif JP", serif;
+  --font-sans: "Helvetica Neue", sans-serif;
+  --max-width: 900px;
+  --link-color: #0366d6;
+}
+
+body {
+  font-family: var(--font-body);
+  line-height: 1.7;
+  margin: 0;
+  background-color: #fafafa;
+  color: #222;
+}
+
+header, main, footer {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 1.5rem;
+}
+
+header h1 {
+  font-family: var(--font-sans);
+  font-size: 1.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.subtitle {
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--link-color);
+}
+
+main {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 2rem;
+}
+
+aside h3 {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.2rem;
+}
+
+footer {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+  border-top: 1px solid #ddd;
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
