@@ -1,7 +1,3 @@
 # Yuya Tokuta — Personal Website
 
-A website built with plain HTML and CSS.
-
-## License
-
-© 2025 Yuya M. Tokuta. All rights reserved.
+© 2025 Yuya Moses Tokuta. All rights reserved.
