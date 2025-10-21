@@ -6,7 +6,7 @@
   --link-color: #0366d6;
   --bg-color: #fafafa;
   --text-color: #222;
-  --border-color: #ddd;
+  --muted-text: #666;
 }
 
 /* Dark mode (automatic) */
@@ -14,7 +14,7 @@
   :root {
     --bg-color: #181818;
     --text-color: #e5e5e5;
-    --border-color: #333;
+    --muted-text: #aaa;
     --link-color: #6ca0ff;
   }
 }
@@ -26,10 +26,11 @@ html {
 
 body {
   font-family: var(--font-body);
-  line-height: 1.8;
+  line-height: 1.75;
   margin: 0;
   background-color: var(--bg-color);
   color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
 }
 
 header,
@@ -43,15 +44,15 @@ footer {
 /* === Header === */
 header h1 {
   font-family: var(--font-sans);
-  font-size: 1.9rem;
-  margin-bottom: 0.3rem;
+  font-size: 2rem;
+  margin-bottom: 0.4rem;
 }
 
 .subtitle {
-  color: #666;
-  margin-bottom: 1.2rem;
+  color: var(--muted-text);
+  margin-bottom: 1.4rem;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 nav ul {
@@ -60,41 +61,55 @@ nav ul {
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 1.2rem;
+  gap: 1.3rem;
 }
 
 nav a {
   text-decoration: none;
   color: var(--link-color);
   font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease;
 }
 
 nav a:hover {
-  text-decoration: underline;
+  color: #024ea2;
 }
 
 /* === Sections === */
 main section {
-  margin-top: 2.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-color);
+  margin-top: 3rem;
+  padding-top: 0.5rem;
+}
+
+main section + section {
+  border-top: 1px solid rgba(0, 0, 0, 0.05); /* subtle divider only between sections */
+  padding-top: 2rem;
 }
 
 main h2 {
   font-family: var(--font-sans);
-  font-size: 1.3rem;
-  margin-bottom: 0.6rem;
-  color: var(--text-color);
+  font-size: 1.35rem;
+  margin-bottom: 0.7rem;
+}
+
+main h3 {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  margin-top: 1.2rem;
+  margin-bottom: 0.4rem;
 }
 
 main p {
   margin-bottom: 1rem;
-  text-align: justify;
+  text-align: left;
+  color: var(--text-color);
 }
 
 /* === Lists === */
 ul {
   padding-left: 1.2rem;
+  margin-top: 0.3rem;
 }
 
 li {
@@ -104,34 +119,40 @@ li {
 /* === Footer === */
 footer {
   font-size: 0.9rem;
-  color: #888;
+  color: var(--muted-text);
   text-align: center;
-  border-top: 1px solid var(--border-color);
-  margin-top: 2.5rem;
-  padding-top: 1rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 footer a {
   color: var(--link-color);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
 
 /* === Responsive adjustments === */
 @media (max-width: 700px) {
   body {
     font-size: 0.95rem;
+    line-height: 1.7;
   }
 
   header,
   main,
   footer {
-    padding: 1rem;
+    padding: 1.2rem;
   }
 
   nav ul {
-    gap: 0.8rem;
+    gap: 1rem;
   }
 
   main section {
-    margin-top: 2rem;
+    margin-top: 2.2rem;
   }
 }
