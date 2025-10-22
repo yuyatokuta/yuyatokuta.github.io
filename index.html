@@ -78,10 +78,9 @@
 
       <h3>Email</h3>
       <p><a href="mailto:tokuta.yuya.2y@kyoto-u.ac.jp">tokuta.yuya.2y@kyoto-u.ac.jp</a></p>
+    </section>
 
-      </section>
-
-      <section id="links">
+    <section id="links">
       <h2>Links</h2>
       <ul>
         <li><a href="https://researchmap.jp/yuyatokuta?lang=en" target="_blank">researchmap page</a></li>
@@ -95,7 +94,14 @@
   </main>
 
   <footer>
+    <p id="last-updated"></p>
     <p>© 2025 Yuya Tokuta. All rights reserved.</p>
+    <script>
+      // --- Automatically display last updated date ---
+      const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+      const updated = new Date(document.lastModified).toLocaleString('en-US', options);
+      document.getElementById("last-updated").textContent = `Last updated: ${updated}`;
+    </script>
   </footer>
 </body>
 </html>
