@@ -2,7 +2,7 @@
 :root {
   --font-body: "Noto Serif JP", "Noto Serif", serif;
   --font-sans: "Noto Sans JP", "Noto Sans", sans-serif;
-  --max-width: 1200px; /* widened from 900px */
+  --max-width: 1200px;
   --link-color: #2b63c8;
   --bg-color: #ffffff;
   --text-color: #222222;
@@ -10,14 +10,56 @@
   --divider-color: rgba(0, 0, 0, 0.06);
 }
 
-/* Dark mode (automatic) */
+/* === Dark mode (automatic) === */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-color: #1b1b1b;
+    --bg-color: #121212;
     --text-color: #e7e7e7;
     --muted-text: #aaaaaa;
-    --link-color: #8db4ff;
+    --link-color: #40C4FF; /* bright cyan for high contrast */
     --divider-color: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Accessible links for color-vision diversity */
+  a {
+    color: var(--link-color);
+    text-decoration: underline;
+    text-decoration-color: rgba(64, 196, 255, 0.6);
+    text-underline-offset: 2px;
+    font-weight: 500;
+  }
+
+  a:visited {
+    color: #80CBC4; /* teal-green, distinguishable from cyan */
+  }
+
+  a:hover,
+  a:focus {
+    color: #82E9FF; /* brighter cyan on hover */
+    text-decoration-thickness: 2px;
+  }
+
+  a:active {
+    color: #FFD54F; /* warm yellow feedback */
+  }
+
+  /* Navigation links inherit the same accessible logic */
+  nav a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.25s ease, text-decoration-thickness 0.2s ease;
+  }
+
+  nav a:hover,
+  nav a:focus {
+    color: #82E9FF;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  nav a:active {
+    color: #FFD54F;
   }
 }
 
@@ -40,7 +82,7 @@ main,
 footer {
   max-width: var(--max-width);
   margin: auto;
-  padding: 2rem 1.5rem; /* more balanced spacing */
+  padding: 2rem 1.5rem;
 }
 
 /* === Header === */
@@ -67,6 +109,7 @@ nav ul {
   gap: 1.2rem;
 }
 
+/* Light-mode nav links */
 nav a {
   text-decoration: none;
   color: var(--link-color);
