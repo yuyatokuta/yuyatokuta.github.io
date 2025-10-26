@@ -1,49 +1,55 @@
-/* === Global settings === */
+/* ==========================================================
+   Global Settings
+   ========================================================== */
 :root {
-  --font-body: "Noto Serif JP", "Noto Serif", serif;
-  --font-sans: "Noto Sans JP", "Noto Sans", sans-serif;
+  --font-body: "Noto Serif JP", "Noto Serif", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-sans: "Noto Sans JP", "Noto Sans", "Hiragino Sans", "Yu Gothic", sans-serif;
   --max-width: 1200px;
-  --link-color: #2b63c8;
+
   --bg-color: #ffffff;
   --text-color: #222222;
   --muted-text: #555555;
+  --link-color: #3367d6; /* brighter blue for better contrast */
   --divider-color: rgba(0, 0, 0, 0.06);
 }
 
-/* === Dark mode (automatic) === */
+/* ==========================================================
+   Dark Mode (automatic)
+   ========================================================== */
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-color: #121212;
     --text-color: #e7e7e7;
     --muted-text: #aaaaaa;
-    --link-color: #40C4FF; /* bright cyan for high contrast */
+    --link-color: #40c4ff; /* bright cyan */
     --divider-color: rgba(255, 255, 255, 0.08);
   }
 
-  /* Accessible links for color-vision diversity */
+  /* Accessible links */
   a {
     color: var(--link-color);
     text-decoration: underline;
     text-decoration-color: rgba(64, 196, 255, 0.6);
     text-underline-offset: 2px;
+    text-decoration-thickness: 1.5px;
     font-weight: 500;
   }
 
   a:visited {
-    color: #80CBC4; /* teal-green, distinguishable from cyan */
+    color: #80cbc4; /* teal-green for distinction */
   }
 
   a:hover,
   a:focus {
-    color: #82E9FF; /* brighter cyan on hover */
+    color: #82e9ff;
     text-decoration-thickness: 2px;
   }
 
   a:active {
-    color: #FFD54F; /* warm yellow feedback */
+    color: #ffd54f; /* warm feedback */
   }
 
-  /* Navigation links inherit the same accessible logic */
+  /* Navigation links */
   nav a {
     color: var(--link-color);
     text-decoration: none;
@@ -53,17 +59,19 @@
 
   nav a:hover,
   nav a:focus {
-    color: #82E9FF;
+    color: #82e9ff;
     text-decoration: underline;
     text-underline-offset: 2px;
   }
 
   nav a:active {
-    color: #FFD54F;
+    color: #ffd54f;
   }
 }
 
-/* === Base === */
+/* ==========================================================
+   Base Layout
+   ========================================================== */
 html {
   scroll-behavior: smooth;
 }
@@ -85,7 +93,9 @@ footer {
   padding: 2rem 1.5rem;
 }
 
-/* === Header === */
+/* ==========================================================
+   Header
+   ========================================================== */
 header h1 {
   font-family: var(--font-sans);
   font-size: 2rem;
@@ -100,6 +110,7 @@ header h1 {
   line-height: 1.6;
 }
 
+/* Navigation */
 nav ul {
   list-style: none;
   padding: 0;
@@ -120,10 +131,12 @@ nav a {
 }
 
 nav a:hover {
-  opacity: 0.8;
+  color: #1e4eb7; /* subtle darken instead of opacity */
 }
 
-/* === Sections === */
+/* ==========================================================
+   Main Content
+   ========================================================== */
 main section {
   margin-top: 3rem;
   padding-top: 0.5rem;
@@ -131,7 +144,8 @@ main section {
 
 main section + section {
   border-top: 1px solid var(--divider-color);
-  padding-top: 2rem;
+  padding-top: 2.5rem;
+  margin-top: 3rem;
 }
 
 main h2 {
@@ -154,7 +168,9 @@ main p {
   text-align: left;
 }
 
-/* === Lists === */
+/* ==========================================================
+   Lists
+   ========================================================== */
 ul {
   padding-left: 1.2rem;
   margin-top: 0.3rem;
@@ -164,7 +180,9 @@ li {
   margin-bottom: 0.4rem;
 }
 
-/* === Footer === */
+/* ==========================================================
+   Footer
+   ========================================================== */
 footer {
   font-size: 0.9rem;
   color: var(--muted-text);
@@ -177,14 +195,16 @@ footer {
 footer a {
   color: var(--link-color);
   text-decoration: none;
-  transition: opacity 0.2s;
+  transition: color 0.2s;
 }
 
 footer a:hover {
-  opacity: 0.8;
+  color: #1e4eb7;
 }
 
-/* === Responsive adjustments === */
+/* ==========================================================
+   Responsive Adjustments
+   ========================================================== */
 @media (max-width: 1000px) {
   body {
     font-size: 0.95rem;
@@ -203,5 +223,27 @@ footer a:hover {
 
   main section {
     margin-top: 2.2rem;
+  }
+}
+
+/* ==========================================================
+   Print Styles
+   ========================================================== */
+@media print {
+  nav,
+  footer {
+    display: none;
+  }
+
+  body {
+    background: white;
+    color: black;
+    font-size: 12pt;
+    line-height: 1.6;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
   }
 }
