@@ -20,7 +20,13 @@
   <link rel="canonical" href="https://yuyatokuta.github.io">
 </head>
 
-<body>
+<body data-theme="light">
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+    <span class="icon-sun">&#9728;</span>
+    <span class="icon-moon">&#9790;</span>
+  </button>
+
   <header>
     <h1>Yuya Tokuta</h1>
     <p class="subtitle">Postdoctoral researcher working on dynamical systems, data science, and bioinformatics.</p>
@@ -144,5 +150,46 @@
         `Last updated: ${datePart} at ${timePart} JST.`;
     </script>
   </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    (function() {
+      const themeToggle = document.getElementById('theme-toggle');
+      const body = document.body;
+
+      // Check for saved theme preference or use system preference
+      function getPreferredTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          return savedTheme;
+        }
+        // Check system preference
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+
+      // Apply theme
+      function setTheme(theme) {
+        body.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+      }
+
+      // Initialize theme
+      setTheme(getPreferredTheme());
+
+      // Toggle theme on button click
+      themeToggle.addEventListener('click', function() {
+        const currentTheme = body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+      });
+
+      // Listen for system theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) {
+          setTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
