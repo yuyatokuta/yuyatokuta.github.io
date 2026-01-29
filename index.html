@@ -18,9 +18,20 @@
 
   <!-- Canonical link -->
   <link rel="canonical" href="https://yuyatokuta.github.io">
+
+  <!-- Early theme initialization to prevent flash -->
+  <script>
+    (function() {
+      var theme = localStorage.getItem('theme');
+      if (!theme) {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
 </head>
 
-<body data-theme="light">
+<body>
   <!-- Theme Toggle Button -->
   <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
     <span class="icon-sun">&#9728;</span>
@@ -155,7 +166,7 @@
   <script>
     (function() {
       const themeToggle = document.getElementById('theme-toggle');
-      const body = document.body;
+      const root = document.documentElement;
 
       // Check for saved theme preference or use system preference
       function getPreferredTheme() {
@@ -169,16 +180,16 @@
 
       // Apply theme
       function setTheme(theme) {
-        body.setAttribute('data-theme', theme);
+        root.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
       }
 
-      // Initialize theme
+      // Initialize theme (already set in head, but ensure consistency)
       setTheme(getPreferredTheme());
 
       // Toggle theme on button click
       themeToggle.addEventListener('click', function() {
-        const currentTheme = body.getAttribute('data-theme');
+        const currentTheme = root.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         setTheme(newTheme);
       });
