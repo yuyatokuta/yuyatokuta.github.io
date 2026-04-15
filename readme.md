@@ -1,3 +1,3 @@
 # Yuya Tokuta — Personal Website
 
-© 2025, Yuya Tokuta. All rights reserved.
+© 2023 - 2026, Yuya Moses Tokuta. All rights reserved.
