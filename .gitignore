@@ -1,1 +1,5 @@
-*.code-workspace
+# コメント
+.gitignore # 特定のファイルを除外
+.DS_Store
+*.code-workspace # 拡張子による除外
+archive/ # ディレクトリ全体を除外

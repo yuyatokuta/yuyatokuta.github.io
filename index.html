@@ -22,8 +22,13 @@
   <!-- Early theme initialization to prevent flash -->
   <script>
     (function() {
-      var theme = localStorage.getItem('theme');
-      if (!theme) {
+      var theme;
+      try {
+        theme = localStorage.getItem('theme');
+      } catch (error) {
+        // Theme switching also works when storage is unavailable.
+      }
+      if (theme !== 'dark' && theme !== 'light') {
         theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       }
       document.documentElement.setAttribute('data-theme', theme);
@@ -33,9 +38,14 @@
 
 <body>
   <!-- Theme Toggle Button -->
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-    <span class="icon-sun">&#9728;</span>
-    <span class="icon-moon">&#9790;</span>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+    </svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M21 12.79A9 9 0 0 1 11.21 3 9 9 0 1 0 21 12.79Z" />
+    </svg>
   </button>
 
   <header>
@@ -79,11 +89,12 @@
       <h2>Publications</h2>
       <h3>2026</h3>
       <ul>
+        <li><strong>Yuya Tokuta</strong>, Tomonori Nakamura, Kohei Fujiwara, Masanori Imamura, Masahiro Nagano, Mitinori Saitou, Yusuke Imoto, and Yasuaki Hiraoka. "Geometric inference of cross-species transcriptome correspondence," <em>Cell Reports Methods</em>. DOI: <a href="https://doi.org/10.1016/j.crmeth.2026.101643" target="_blank">10.1016/j.crmeth.2026.101643</a></li>
         <li>Olympio Hacquard, <strong>Yuya Tokuta</strong>, Yusuke Imoto, Tomonori Nakamura, Shuto Deguchi, Masahiro Nagano, Mitinori Saitou, and Yasuaki Hiraoka. "CycloCross: Adversarial single-cell RNA-seq data translation across species," <em>bioRxiv</em> (preprint). DOI: <a href="https://doi.org/10.64898/2026.09.24.754263" target="_blank">10.64898/2026.09.24.754263</a></li>
       </ul>
       <h3>2025</h3>
       <ul>
-        <li><strong>Yuya Tokuta</strong>, Tomonori Nakamura, Kohei Fujiwara, Masanori Imamura, Masahiro Nagano, Mitinori Saitou, Yusuke Imoto, and Yasuaki Hiraoka. "Geometric inference of cross-species transcriptome correspondence using Gromov-Wasserstein optimal transport," <em>bioRxiv</em> (preprint). DOI: <a href="https://doi.org/10.1101/2025.10.23.684069" target="_blank">10.1101/2025.10.23.684069</a></li>
+        <li><strong>Yuya Tokuta</strong>, Tomonori Nakamura, Kohei Fujiwara, Masanori Imamura, Masahiro Nagano, Mitinori Saitou, Yusuke Imoto, and Yasuaki Hiraoka. "Geometric inference of cross-species transcriptome correspondence using Gromov-Wasserstein optimal transport," <em>bioRxiv</em> (preprint). DOI: <a href="https://doi.org/10.1101/2025.10.23.684069" target="_blank">10.1101/2025.10.23.684069</a>. Published version DOI: <a href="https://doi.org/10.1016/j.crmeth.2026.101643" target="_blank">10.1016/j.crmeth.2026.101643</a></li>
       </ul>
       <h3>2019</h3>
       <ul>
@@ -173,36 +184,38 @@
       const themeToggle = document.getElementById('theme-toggle');
       const root = document.documentElement;
 
-      // Check for saved theme preference or use system preference
-      function getPreferredTheme() {
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+      let preferredTheme = null;
+      try {
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-          return savedTheme;
+        if (savedTheme === 'dark' || savedTheme === 'light') {
+          preferredTheme = savedTheme;
         }
-        // Check system preference
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      } catch (error) {
+        // Keep the preference in memory when storage is unavailable.
       }
 
-      // Apply theme
-      function setTheme(theme) {
+      function applyTheme(theme) {
         root.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
+        themeToggle.setAttribute('aria-label',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
       }
 
-      // Initialize theme (already set in head, but ensure consistency)
-      setTheme(getPreferredTheme());
+      applyTheme(preferredTheme || (systemTheme.matches ? 'dark' : 'light'));
 
-      // Toggle theme on button click
       themeToggle.addEventListener('click', function() {
-        const currentTheme = root.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        setTheme(newTheme);
+        preferredTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(preferredTheme);
+        try {
+          localStorage.setItem('theme', preferredTheme);
+        } catch (error) {
+          // The selected theme remains active for this page session.
+        }
       });
 
-      // Listen for system theme changes
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-        if (!localStorage.getItem('theme')) {
-          setTheme(e.matches ? 'dark' : 'light');
+      systemTheme.addEventListener('change', function(e) {
+        if (preferredTheme === null) {
+          applyTheme(e.matches ? 'dark' : 'light');
         }
       });
     })();

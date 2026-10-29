@@ -14,7 +14,7 @@
 }
 
 /* ==========================================================
-   Dark Mode (class-based)
+   Dark Mode (data attribute)
    ========================================================== */
 [data-theme="dark"] {
   --bg-color: #121212;
@@ -79,6 +79,8 @@
   border-radius: 50%;
   width: 44px;
   height: 44px;
+  padding: 0;
+  box-sizing: border-box;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -109,6 +111,17 @@
 .theme-toggle .icon-sun,
 .theme-toggle .icon-moon {
   position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+  opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
@@ -320,7 +333,12 @@ footer a:hover {
     line-height: 1.6;
   }
 
-  a {
+  a,
+  [data-theme="dark"] a,
+  [data-theme="dark"] a:visited,
+  [data-theme="dark"] a:hover,
+  [data-theme="dark"] a:focus,
+  [data-theme="dark"] a:active {
     color: black;
     text-decoration: none;
   }
